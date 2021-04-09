@@ -1,0 +1,17 @@
+.counter_wrapper {
+    padding: 15px;
+    max-width:300px;
+    width:100%;
+    text-align:center;
+}
+
+.buttons_wrapper {
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.buttons {
+    padding:5px 20px;
+}
+
+
