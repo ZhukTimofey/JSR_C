@@ -9,15 +9,9 @@ class CounterPageContainer extends Component {
         this.state ={
             countValue:0,
             parity:'even',
-            countScreen: {
+            countScreen:'countScreenR'
 
-            border:'1px solid red',
-            maxWidth:'200px',
-            width:'100%',
-            padding:'5px',
-            textAlign:'center',
-            margin: '10px auto',
-        }
+
 
         }
     }
@@ -25,27 +19,13 @@ class CounterPageContainer extends Component {
     this.setState((state)=>{
         const countValue = state.countValue+1;
         let parity= ''
-        let countScreen ={}
+        let countScreen =''
         if(countValue%2==0) {
             parity='even'
-            countScreen= {
-                border:'1px solid red',
-                maxWidth:'200px',
-                width:'100%',
-                padding:'5px',
-                textAlign:'center',
-                margin: '10px auto',
-            }
+            countScreen= 'countScreenR'
         } else {
             parity ='odd'
-            countScreen= {
-                border:'1px solid blue',
-                maxWidth:'200px',
-                width:'100%',
-                padding:'5px',
-                textAlign:'center',
-                margin: '10px auto',
-            }
+            countScreen= 'countScreenB'
         }
         return {
             ...state,
@@ -66,25 +46,12 @@ class CounterPageContainer extends Component {
             let countScreen ={}
             if(countValue%2==0) {
                 parity='even'
-                countScreen= {
-                    border:'1px solid red',
-                    maxWidth:'200px',
-                    width:'100%',
-                    padding:'5px',
-                    textAlign:'center',
-                    margin: '10px auto',
-                }
+                countScreen= 'countScreenR'
             } else {
                 parity ='odd'
-                countScreen= {
-                    border:'1px solid blue',
-                    maxWidth:'200px',
-                    width:'100%',
-                    padding:'5px',
-                    textAlign:'center',
-                    margin: '10px auto',
-                }
+                countScreen= 'countScreenB'
             }
+
             return {
                 ...state,
                 countValue,
@@ -95,14 +62,7 @@ class CounterPageContainer extends Component {
     }
     handleReset = () =>{
         this.setState({countValue: 0,parity:'even'})
-        this.setState({countScreen: {
-                border:'1px solid red',
-                maxWidth:'200px',
-                width:'100%',
-                padding:'5px',
-                textAlign:'center',
-                margin: '10px auto',
-            }})
+        this.setState({countScreen: 'countScreenR'})
     }
     render() {
         return (

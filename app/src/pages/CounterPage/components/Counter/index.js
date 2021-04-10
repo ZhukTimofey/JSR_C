@@ -8,7 +8,7 @@ import './style.css'
 const Counter = ({countValue,parity,handleIncrement,handleDecrement,handleReset,countScreen}) => {
     return (
         <div className='counter_wrapper'>
-            <div style={countScreen}> {countValue}</div>
+            <div className={countScreen}> {countValue}</div>
             <div>{parity}</div>
             <div className ='buttons_wrapper'>
                 <button className='buttons' onClick={handleIncrement}>+</button>
