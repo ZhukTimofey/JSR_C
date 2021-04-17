@@ -13,21 +13,10 @@
 .buttons {
     padding:5px 20px;
 }
-.countScreenR {
-    border:1px solid red;
+.countScreen {
+    border:1px solid ;
     max-width:200px;
     width:100%;
     padding:5px;
-    textAlign:center;
     margin: 10px auto;
 }
-.countScreenB {
-    border:1px solid blue;
-    max-width:200px;
-    width:100%;
-    padding:5px;
-    textAlign:center;
-    margin: 10px auto;
-}
-
-

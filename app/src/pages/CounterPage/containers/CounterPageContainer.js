@@ -1,67 +1,63 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
-import Counter from "../components/Counter";
+import Counter from "../../../comonComponents/Counter";
 import PropTypes from "prop-types";
 
-class CounterPageContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      countValue: 0,
-      parity: "even",
-      countScreenClassName: "countScreenR",
-    };
-  }
-  handleIncrement = () => {
-    this.setState((state) => {
+const CounterPageContainer = () => {
+  const [counterState, setCounterState] = useState({
+    countValue: 0,
+    parityType: "even",
+  });
+  const handleIncrement = useCallback(() => {
+    setCounterState((state) => {
       const countValue = state.countValue + 1;
-      const parity = countValue % 2 == 0 ? "even" : "odd";
-      const countScreenClassName =
-        countValue % 2 == 0 ? "countScreenR" : "countScreenB";
       return {
-        ...state,
+        ...counterState,
         countValue,
-        parity,
-        countScreenClassName,
       };
     });
-  };
-
-  handleDecrement = () => {
-    this.setState((state) => {
-      const countValue = state.countValue - 1;
-      if (countValue >= 0) {
-        const parity = countValue % 2 == 0 ? "even" : "odd";
-        const countScreenClassName =
-          countValue % 2 == 0 ? "countScreenR" : "countScreenB";
+  }, []);
+  const handleDecrement = useCallback(() => {
+    if (counterState.countValue > 0) {
+      setCounterState((state) => {
+        const countValue = state.countValue - 1;
         return {
-          ...state,
+          ...counterState,
           countValue,
-          parity,
-          countScreenClassName,
         };
-      }
+      });
+    }
+  }, [counterState.countValue]);
+  const handleReset = useCallback(() => {
+    setCounterState((state) => {
+      const countValue = 0;
+      const parityType = "even";
+      return {
+        countValue,
+        parityType,
+      };
     });
-  };
-  handleReset = () => {
-    this.setState({
-      countValue: 0,
-      parity: "even",
-      countScreenClassName: "countScreenR",
-    });
-  };
-  render() {
-    return (
-      <Counter
-        countValue={this.state.countValue}
-        parity={this.state.parity}
-        handleIncrement={this.handleIncrement}
-        handleDecrement={this.handleDecrement}
-        handleReset={this.handleReset}
-        countScreenClassName={this.state.countScreenClassName}
-      />
-    );
-  }
-}
+  }, []);
+  useEffect(() => {
+    if (counterState.countValue.prev !== counterState.countValue) {
+      setCounterState((state) => {
+        const parityType = counterState.countValue % 2 === 0 ? "even" : "odd";
+        return {
+          ...counterState,
+          parityType,
+        };
+      });
+    }
+  }, [counterState.countValue]);
+  return (
+    <Counter
+      countValue={counterState.countValue}
+      parityType={counterState.parityType}
+      handleIncrement={handleIncrement}
+      handleDecrement={handleDecrement}
+      handleReset={handleReset}
+    />
+  );
+};
 
 export default CounterPageContainer;

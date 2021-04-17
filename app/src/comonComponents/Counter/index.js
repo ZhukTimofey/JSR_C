@@ -1,22 +1,26 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { ROUTES } from "../../../../routes/routesNames";
-import { Link } from "react-router-dom";
 
 import "./style.css";
 
 const Counter = ({
   countValue,
-  parity,
+  parityType,
   handleIncrement,
   handleDecrement,
   handleReset,
-  countScreenClassName,
+  handleRemove,
 }) => {
   return (
     <div className="counter_wrapper">
-      <div className={countScreenClassName}> {countValue}</div>
-      <div>{parity}</div>
+      {handleDecrement}
+      <div
+        className="countScreen"
+        style={{ borderColor: parityType === "even" ? "red" : "blue" }}
+      >
+        {" "}
+        {countValue}
+      </div>
+      <div>{parityType}</div>
       <div className="buttons_wrapper">
         <button className="buttons" onClick={handleIncrement}>
           +
@@ -28,17 +32,15 @@ const Counter = ({
           -
         </button>
       </div>
-      <Link to={ROUTES.HOME_PAGE}>
-        <button>Go to home page</button>
-      </Link>
+      <button onClick={handleRemove}>Remove </button>
     </div>
   );
 };
 Counter.propTypes = {
   countValue: PropTypes.number.isRequired,
+  parityType: PropTypes.string.isRequired,
   handleIncrement: PropTypes.func.isRequired,
   handleDecrement: PropTypes.func.isRequired,
   handleReset: PropTypes.func.isRequired,
-  countScreenClassName: PropTypes.string.isRequired,
 };
 export default Counter;
