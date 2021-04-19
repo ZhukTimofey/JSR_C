@@ -7,7 +7,7 @@ const Counter = ({
   parityType,
   handleIncrement,
   handleDecrement,
-  handleReset,
+  handleResetCounter,
   handleRemove,
 }) => {
   return (
@@ -25,7 +25,7 @@ const Counter = ({
         <button className="buttons" onClick={handleIncrement}>
           +
         </button>
-        <button className="buttons" onClick={handleReset}>
+        <button className="buttons" onClick={handleResetCounter}>
           reset
         </button>
         <button className="buttons" onClick={handleDecrement}>

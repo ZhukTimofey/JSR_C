@@ -10,16 +10,15 @@ const CounterOfCounterContainer = () => {
       countValue: 0,
       parityType: "even",
     };
+
     const copyCountersList = [...countersList];
-    for (let i = 0; i < countersList.length; i++) {
-      const foundCounter = copyCountersList[i];
-      if (foundCounter.parityType === "even") {
-        const newValue = foundCounter.countValue + 1;
-        foundCounter.countValue = newValue;
-        foundCounter.parityType = newValue % 2 === 0 ? "even" : "odd";
-        setCountersList(copyCountersList);
+    copyCountersList.map(function (elem) {
+      if (elem.parityType === "even") {
+        const newValue = elem.countValue + 1;
+        elem.countValue = newValue;
+        elem.parityType = newValue % 2 === 0 ? "even" : "odd";
       }
-    }
+    });
     setCountersList((state) => {
       return [...state, values];
     }, []);
@@ -27,16 +26,13 @@ const CounterOfCounterContainer = () => {
   const handleRemove = useCallback(
     (index) => {
       const copyCountersList = [...countersList];
-
-      for (let i = 0; i < countersList.length; i++) {
-        const foundCounter = copyCountersList[i];
-        if (foundCounter.parityType === "odd") {
-          const newValue = foundCounter.countValue - 1;
-          foundCounter.countValue = newValue;
-          foundCounter.parityType = newValue % 2 === 0 ? "even" : "odd";
-          setCountersList(copyCountersList);
+      copyCountersList.map(function (elem) {
+        if (elem.parityType === "odd" && elem.countValue !== 0) {
+          const newValue = elem.countValue - 1;
+          elem.countValue = newValue;
+          elem.parityType = newValue % 2 === 0 ? "even" : "odd";
         }
-      }
+      });
 
       copyCountersList.splice(index, 1);
       setCountersList(copyCountersList);
@@ -73,18 +69,19 @@ const CounterOfCounterContainer = () => {
   const handleResetCounter = useCallback(
     (index) => {
       const copyCountersList = [...countersList];
+
       const foundCounter = copyCountersList[index];
       foundCounter.countValue = 0;
-      foundCounter.parityType = 0 % 2 === 0 ? "even" : "odd";
+      foundCounter.parityType = "even";
+
       setCountersList(copyCountersList);
     },
     [countersList]
   );
-  const handleReset = useCallback(() => {
-    setCountersList((state) => {
-      return [];
-    });
-  }, []);
+  const handleReset = () => {
+    setCountersList([]);
+  };
+
   let sumOfValues = 0;
   for (let i = 0; i < countersList.length; i++) {
     sumOfValues += countersList[i].countValue;
