@@ -1,0 +1,33 @@
+.counter_wrapper {
+    padding: 15px;
+    max-width:300px;
+    width:100%;
+    text-align:center;
+}
+
+.buttons_wrapper {
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.buttons {
+    padding:5px 20px;
+}
+.countScreenR {
+    border:1px solid red;
+    max-width:200px;
+    width:100%;
+    padding:5px;
+    textAlign:center;
+    margin: 10px auto;
+}
+.countScreenB {
+    border:1px solid blue;
+    max-width:200px;
+    width:100%;
+    padding:5px;
+    textAlign:center;
+    margin: 10px auto;
+}
+
+
